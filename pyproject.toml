@@ -16,6 +16,7 @@ dependencies = [
     "redis>=5.2.1",
     "alembic>=1.14.0",
     "orjson>=3.10.12",
+    "aiohttp>=3.10.11",
 ]
 
 [tool.uv]

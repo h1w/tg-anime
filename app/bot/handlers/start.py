@@ -14,7 +14,13 @@ __BOT_SETTINGS: BotSettings = get_bot_settings()
 start_router = Router()
 
 
-@start_router.message(ChatTypeFilter(chat_type="private"), CommandStart())
+#########################################
+##########      /start       #############
+#########################################
+@start_router.message(
+    ChatTypeFilter(chat_type="private"),
+    CommandStart(),
+)
 async def command_start_handler(
     message: Message, dialog_manager: DialogManager
 ) -> None:

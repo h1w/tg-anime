@@ -7,6 +7,8 @@ from dishka import make_async_container
 from dishka.integrations.aiogram import setup_dishka
 
 from app.bot.dialogs.menu.dialog import menu_dialog
+from app.bot.handlers.arts import arts_router
+from app.bot.handlers.help import help_router
 from app.bot.handlers.start import start_router
 from app.bot.ioc import DepsProvider
 from app.bot.misc import bot, dp
@@ -30,6 +32,8 @@ def register_dialogs(router: Router):
     """
 
     router.include_router(start_router)
+    router.include_router(arts_router)
+    router.include_router(help_router)
     router.include_router(menu_dialog)
 
 
