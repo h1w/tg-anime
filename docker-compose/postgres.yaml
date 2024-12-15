@@ -1,0 +1,47 @@
+services:
+  db:
+    image: postgres:latest
+    restart: on-failure
+    container_name: postgres-db
+
+    env_file:
+      - ../.env
+
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: tg-anime
+    volumes:
+      - db_data:/var/lib/postgresql
+    ports:
+      - "5432:5432"
+
+    healthcheck:
+      test: ["CMD", "pg_isready"]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+
+    networks:
+      - backend
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5000:80"
+    depends_on:
+      - db
+    networks:
+      - backend
+
+volumes:
+  db_data:
+
+networks:
+  backend:
+    driver: bridge
